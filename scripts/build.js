@@ -74,6 +74,9 @@ function parseArgs(args) {
 			options.listDeps = true;
 		} else if (arg === '--list-modules') {
 			options.listModules = true;
+		} else if (arg.startsWith('--models=')) {
+			options.models = options.models || [];
+			options.models.push(arg.substring('--models='.length));
 		} else if (arg.startsWith('--pytest=')) {
 			options.pytest = options.pytest || [];
 			options.pytest.push(arg.substring('--pytest='.length));
@@ -204,6 +207,7 @@ Options:
   --pytest="args"           Pass arguments to pytest (can be repeated)
   --pytest-pattern="EXPR"  Filter pytest tests by name expression (pytest -k)
   --pytest-preinstall="DEPS" Pre-install pip packages before tests (comma-separated, e.g. "dep1>=10,dep2")
+  --models="args"     Pass arguments to sync_models (can be repeated)
   --jest="args"             Pass arguments to Jest (can be repeated)
   --catch="args"      Pass arguments to Catch2 tests (aptest/engtest)
   --trace="a,b,c"     Enable trace output (passed to engine/tests)
